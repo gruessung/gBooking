@@ -19,7 +19,7 @@
 	 require_once("config.php");
 	 
 	 //show header
-	 require_once("header.php");
+	 require_once("style/header.php");
 	 
 	 //show action
 	 
@@ -44,5 +44,5 @@
 	 require_once("action/$p.php");
 	 
 	 //show footer
-	 require_once("footer.php");
+	 require_once("style/footer.php");
 ?>
