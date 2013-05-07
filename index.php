@@ -14,4 +14,35 @@
 	   See the License for the specific language governing permissions and
 	   limitations under the License.
 	 */
+	 
+	 //include config
+	 require_once("config.php");
+	 
+	 //show header
+	 require_once("header.php");
+	 
+	 //show action
+	 
+	 //if $_GET["action"] is given
+	 if (isset($_GET["action"]))
+	 {
+	 	$p = $_GET["action"];
+		
+	 	//look !if file exists
+	 	if (!file_exists("action/$p.php"))
+		{
+			$p = "404";
+		}
+	 }
+	 //else include default home
+	 else 
+	 {
+	 	$p = "index";
+	 }
+	 
+	 //include page
+	 require_once("action/$p.php");
+	 
+	 //show footer
+	 require_once("footer.php");
 ?>
