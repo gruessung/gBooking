@@ -64,7 +64,7 @@
 	 {
 	 	$xmlURL = "https://spreadsheets.google.com/feeds/worksheets/".$this->getSpreadsheetKey()."/public/values";
 		$data = $this->fetchXML($xmlURL);
-		echo $xmlURL;
+
 		$xml = simplexml_load_string($data);
 		
 		for ($i = 0; $i < count ($xml->entry); $i++)
@@ -113,6 +113,6 @@
 							
 							$xml->entry[9]->content //Koordinaten
 							));
-		return $return;
+		return $xml;
 	 }
  }
