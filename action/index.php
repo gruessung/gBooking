@@ -39,6 +39,8 @@
 		{
 			$date = $_GET["date"];
 			$expl = explode("/", $date);
+			
+			//delete 0 in day and month
 			$expl[0] = preg_replace("%0%", "", $expl[0]);
 			$expl[1] = preg_replace("%0%", "", $expl[1]);
 		
@@ -54,12 +56,15 @@
 			$result = $db->querySingle("SELECT kurz FROM worksheets WHERE `id` = '$worksheet[2]'");
 			if ($result == null)
 			{
+				//insert new worksheet
 				$db->exec("INSERT INTO worksheets(kurz, url, id, date) VALUES ('$worksheet[0]', '$worksheet[1]', '$worksheet[2]','$worksheet[3]')");
 				$update = true;
 			}
 			else
 			{
 				$result = $db->querySingle("SELECT date FROM worksheets WHERE `id` = '$worksheet[2]'");
+				
+				//worksheet date is older than last updated date in ods
 				if (strcmp($result, $worksheet[3]) != 0)
 				{
 					$db->exec("UPDATE worksheets SET `date`='$worksheet[3]' WHERE `id` = '$worksheet[2]'");
@@ -69,20 +74,24 @@
 			
 			
 		
-			
+			//get coordinates, name, street, postal code and town of all entries
 			$coord = explode(",",$db->querySingle("SELECT value FROM cells WHERE `worksheetID` = '$worksheet[2]' AND `name`='Lage:' "));
 			$bez = $db->querySingle("SELECT value FROM cells WHERE `worksheetID` = '$worksheet[2]' AND `name`='Bezeichnung:' ");
 			$str = $db->querySingle("SELECT value FROM cells WHERE `worksheetID` = '$worksheet[2]' AND `name`='Straße:' ");
 			$plz = $db->querySingle("SELECT value FROM cells WHERE `worksheetID` = '$worksheet[2]' AND `name`='PLZ:' ");
 			$ort = $db->querySingle("SELECT value FROM cells WHERE `worksheetID` = '$worksheet[2]' AND `name`='Ort:' ");
 			
+			//set description
 			$desc = "<b>$bez</b><br>$str<br>$plz $ort";
-			array_push($text, $desc);
 			
+			//push in arrays
+			array_push($text, $desc);
 			array_push($lat, @$coord[1]);
 			array_push($lng, @$coord[0]);
 			
+			//check allocation
 			$belegung = $db->querySingle("SELECT value FROM cells WHERE `worksheetID` = '$worksheet[2]' AND `name`='$date' ");
+			//select marker color
 			if (strcmp($belegung, "x") == 0)
 				array_push($marker,"green");
 			else

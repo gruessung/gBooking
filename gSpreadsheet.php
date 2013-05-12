@@ -1,6 +1,13 @@
 <?php
 /**
  * Class to read google spreadsheet
+ * 
+ * This class provide functionality to read spreadsheets from google docs/dtive
+ * 
+ * Read-Only is supported
+ * 
+ * @author Alexander Gruessung
+ * @since 06-05-2013
  */
  
  class gSpreadsheet
@@ -17,7 +24,9 @@
 	 
 	 
 	/**
+	 * public constructor
 	 * 
+	 * @param id of spreadsheet
 	 */
 	function __construct($id)
 	{
@@ -26,7 +35,9 @@
 	}
 	
 	/**
+	 * function getSpreadsheetKey
 	 * 
+	 * @return key of current spreadsheet
 	 */
 	function getSpreadsheetKey()
 	{
@@ -34,14 +45,22 @@
 	}
 	
 	/**
+	 * function setSpreadsheetKey
 	 * 
+	 * @param id of current spreadsheet
 	 */
 	 function setSpreadSheetKey($id)
 	 {
 	 	$this->spreadsheetID = $id;
 	 }
+	 
 	 /**
+	  * private function fetchXML
 	  * 
+	  * get XML and return it
+	  * 
+	  * @param xmlURL
+	  * @return curl object
 	  */
 	 private function fetchXML($xmlURL)
 	 {
@@ -57,8 +76,11 @@
 		$data = curl_exec($ch);
 		return $data;
 	 }
+	 
 	 /**
+	  *	function loadWorksheets
 	  * 
+	  * function to load all worksheets and save this in an array 
 	  */
 	 function loadWorksheets()
 	 {
@@ -85,7 +107,9 @@
 	 }
 	 
 	 /**
+	  * function getWorksheets
 	  * 
+	  * @return array with all worksheets of current spreadsheet
 	  */
 	 function getWorksheets()
 	 {
@@ -93,26 +117,18 @@
 	 }
 	 
 	 /**
+	  * function loadCells
 	  * 
+	  * load all cells with value of worksheet $id
+	  * 
+	  * @param id of worksheet
+	  * @return array with cells
 	  */
 	 function loadCells($id)
 	 {
 	 	$xmlURL = "https://spreadsheets.google.com/feeds/cells/".$this->getSpreadsheetKey()."/$id/public/values";
 		$data = $this->fetchXML($xmlURL);
 		$xml = simplexml_load_string($data);
-		$return = array();
-		array_push($return, 
-							array(
-							$xml->entry[1]->content, //bezeichnung
-							
-							$xml->entry[3]->content, //str
-							
-							$xml->entry[5]->content, //plz
-							
-							$xml->entry[7]->content, //ort
-							
-							$xml->entry[9]->content //Koordinaten
-							));
 		return $xml;
 	 }
  }

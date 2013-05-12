@@ -11,7 +11,7 @@
 	 //e.g. 0Alf1vrd7tNnTdE9vRnljWkszNFpjRmtCdmlPalJQd2c
 	 define("spreadsheet", "0Alf1vrd7tNnTdE9vRnljWkszNFpjRmtCdmlPalJQd2c");
 	 
-	 //Google Maps v3 API
+	 //Google Maps v3 API from API console
 	 define("apikey", "AIzaSyCxNQZmYsOTkVzXgwR6CkQuzVfaioAqY2w");
 	 
 	 

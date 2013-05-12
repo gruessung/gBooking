@@ -9,6 +9,7 @@
 	//connect to db
 	$db = new SQLite3(sqlite);
 	
+	//get next worksheet id
 	if (!isset($_GET["next"]))
 	{
 		$next = 0;	
@@ -17,6 +18,8 @@
 	{
 		$next = $_GET["next"];
 	}
+	
+	//at end forward to index
 	if ($next >= count($worksheets) -1 )
 	{
 		echo '<meta http-equiv="refresh" content="1; URL=index.php">';
@@ -33,6 +36,7 @@
 	//get cells
 	$cell = $spread->loadCells($sheet[2]);
 
+	//delete old cell entried in db
 	$db->exec("DELETE FROM cells WHERE `worksheetID` = '$sheet[2]'");
 	for ($i = 0; $i < count($cell->entry)-1; $i++)
 	{
