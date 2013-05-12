@@ -12,7 +12,7 @@ PHP 5.4.7 (auf dieser Version wurde programmiert)
 
 php openssl Support (ggf. in php.ini aktiviern)
 
-in der Datei my_php_config.htm ist meine PHP Konfiguration zu finden, zum evtl. Abgleich.
+in der Datei my_php_config.htm ist meine PHP Konfiguration zu finden, zum evtl. Abgleich. (info.php enthält phpinfo())
 
 php SQLITE 3 Support
 
@@ -30,4 +30,13 @@ index.php im Browser aufrufen (der erste Aufruf [und jeder weitere nach einer Ä
 Benutzte Bibliotheken
 =====================
 jQuery
+
+jQuery-UI
+
+
+
+
+Viel Spaß!
+
+Autor: Alexander Grüßung, 2013, www.gvisions.de
 
