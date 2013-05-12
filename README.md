@@ -27,6 +27,15 @@ in der config.php eventuell Spreadsheet ID und API Key anpassen
 index.php im Browser aufrufen (der erste Aufruf [und jeder weitere nach einer Änderung in der OSD Datei] dauert länger, da die DB gefüllt wird)
 
 
+Verwendung
+==========
+
+In dem Textfeld oben kann das Datum via datepicker ausgewählt werden.
+
+Auf der Karte wird mittels Marker der Belegungsstatus dargestellt.
+Dabei gilt: rot = belegt; grün = frei
+
+
 Benutzte Bibliotheken
 =====================
 jQuery
