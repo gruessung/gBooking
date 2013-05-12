@@ -1,7 +1,4 @@
     <?php
-    /**
-	 * //TODO Marker in array speichern, je nach belegunsstatus (datum abfragen!!)
-	 */
     	require_once("gSpreadsheet.php");
 		$spread = new gSpreadsheet(spreadsheet);
 		$worksheets = $spread->getWorksheets();
@@ -40,11 +37,19 @@
 			$date = $_GET["date"];
 			$expl = explode("/", $date);
 			
-			//delete 0 in day and month
-			$expl[0] = preg_replace("%0%", "", $expl[0]);
-			$expl[1] = preg_replace("%0%", "", $expl[1]);
-		
-			$date = "$expl[0]/$expl[1]/$expl[2]";
+			//if given date isn't numeric, fetch current date
+			if (!is_numeric($expl[0]) OR !is_numeric($expl[1]) OR !is_numeric($expl[2])) 
+			{
+				$date = date("n/j/Y", time());
+			}
+			else
+			{
+				//delete 0 in day and month
+				$expl[0] = preg_replace("%0%", "", $expl[0]);
+				$expl[1] = preg_replace("%0%", "", $expl[1]);
+			
+				$date = "$expl[0]/$expl[1]/$expl[2]";
+			}
 		}
 		
 		foreach ($worksheets as $worksheet)
